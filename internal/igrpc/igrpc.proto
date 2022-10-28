@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package igrpc;
+option go_package = "github.com/nikchis/grpc-vs-nng/internal/igrpc";
+
+service RemoteService {
+	rpc CallImageProcessing (RequestImageProcessing) returns (ResponseImageProcessing) {}
+}
+
+message RequestImageProcessing {
+	string message_id = 1;
+	uint32 left = 2;
+	uint32 top = 3;
+	uint32 right = 4;
+	uint32 bottom = 5;
+	uint32 quality = 6;
+	bytes payload = 7;
+}
+
+message ResponseImageProcessing {
+	string req_message_id = 1;
+	bool success = 2;
+	uint32 src_width = 3;
+	uint32 src_height = 4;
+	uint32 dst_width = 5;
+	uint32 dst_height = 6;
+	string message = 7;
+	bytes payload = 8;
+}
